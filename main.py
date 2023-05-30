@@ -21,3 +21,16 @@ def chat_gpt3(message):
 
     response = requests.post(url, headers=headers, data=json.dumps(data))
     return response.json()["choices"][0]["message"]["content"]
+
+
+def main():
+    while True:
+        user_message = input("Enter your message (type 'exit' to quit): ")
+        if user_message.strip().lower() == 'exit':
+            break
+        else:
+            print("GPT-3 Response: ", chat_gpt3(user_message))
+
+
+if __name__ == "__main__":
+    main()
