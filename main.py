@@ -20,7 +20,13 @@ def chat_gpt3(message):
     }
 
     response = requests.post(url, headers=headers, data=json.dumps(data))
-    return response.json()["choices"][0]["message"]["content"]
+    response_json = response.json()
+
+    try:
+        return response_json["choices"][0]["message"]["content"]
+    except KeyError:
+        print(f"Unexpected response: {response_json}")
+        return ""
 
 
 def main():
